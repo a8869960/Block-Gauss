@@ -1,9 +1,6 @@
 //
 // Created by varsem on 28.09.23.
 //
-#define x(i) x[i - 1]
-#define helper(i) helper[i - 1]
-
 #include <stdlib.h>
 #include <errno.h>
 #include <limits.h>
@@ -36,14 +33,17 @@ double norm1(double *x, int n)
 {
     double norma = 0;
 
-    for(int i = 1; i <= n; i++)
-        norma += abs(x(i));
+    for(int i = 0; i < n; i++)
+        norma += abs(x[i]);
 
     return norma;
 }
 
 int calc_r1(double* A, double* x, double* B, int n, double* helper, double *r1)
 {
+    if(n > 11000)
+        return 0;
+
     memset(helper, 0, n);
 
     if(matrixProduct(A, n, n, x, n, 1, helper) == -1)
@@ -59,6 +59,9 @@ int calc_r1(double* A, double* x, double* B, int n, double* helper, double *r1)
 
 void calc_r2(double *x, int n, double *r2)
 {
-    for(int i = 1; i <= n; i++)
-        *r2 += abs(x(i) - (i % 2));
+    double s = 0;
+    for(int i = 0; i < n; i++)
+        s += abs(x[i] - (i % 2));
+
+    *r2 = s;
 }

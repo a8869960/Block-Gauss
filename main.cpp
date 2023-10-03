@@ -54,12 +54,13 @@ int main(int ac, char* av[])
             cout << "Wrong parameter s." << endl;
             return -1;
         }
-        if(r < 1 or r > n)
+        if(r < 1)
         {
             cout << "Wrong parameter r." << endl;
             return -1;
         }
 
+        //Инициализация матрицы A
         A = new double[n*n];
 
         if(ac == 5)
@@ -74,8 +75,14 @@ int main(int ac, char* av[])
             }
         }
 
+        cout << "Matrix A:" << endl;
+        matrixOutput(A, n, n, r);
+
         double *B = new double[n];
         init_B(B, A, n);
+
+        cout << "Matrix B:" << endl;
+        matrixOutput(B, 1, n, r);
 
         double *x = new double[n];
         double *helper = nullptr;
@@ -85,18 +92,16 @@ int main(int ac, char* av[])
         if(gauss_func(n, m, A, B, x, helper) == -1)
         {
             cout << "Can't be used this method." << endl;
-            delete[] A;
-            delete[] B;
-            delete[] x;
-            delete[] helper;
         } else
+        {
+            cout << "Solution:" << endl;
             matrixOutput(x, 1, n, r);
-
+        }
         double t1 = (start_time - clock()) / CLOCKS_PER_SEC;
 
         //Запись результата
         start_time = clock();
-        double r1;
+        double r1 = 0;
         helper = new double[n];
         if(calc_r1(A, x, B, n, helper, &r1) == -1)
             return -1;
@@ -106,6 +111,7 @@ int main(int ac, char* av[])
         double t2 = (start_time - clock()) / CLOCKS_PER_SEC;
 
         int task = 11;
+
         printf (
                 "%s : Task = %d Res1 = %e Res2 = %e T1 = %.2f T2 = %.2f S = %d N = %d M = %d\n",
                 av[0], task, r1, r2, t1, t2, s, n, m);

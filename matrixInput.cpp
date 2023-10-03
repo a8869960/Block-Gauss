@@ -11,9 +11,6 @@
 
 using namespace std;
 
-#define A(i, j) A[(i - 1) * n + j - 1]
-#define B(i) B[i - 1]
-
 int fileMatrixInput(double* A, char* filename, int n)
 {
     FILE* file;
@@ -77,7 +74,7 @@ int fileMatrixInput(double* A, char* filename, int n)
     {
         for(int j = 1; j <= n; j++)
         {
-            if(fscanf(file, "%lf", &A(i, j)) != 1)
+            if(fscanf(file, "%lf", &A[(i - 1) * n + j -1]) != 1)
             {
                 cout << "Cant read element from file." << endl;
                 return -1;
@@ -98,19 +95,19 @@ void f(double *A, int s, int n)
         {
             switch (s) {
                 case 1:
-                    A(i, j) = n - max(i, j) + 1;
+                    A[(i - 1) * n + j -1] = n - max(i, j) + 1;
                     break;
 
                 case 2:
-                    A(i, j) = max(i, j);
+                    A[(i - 1) * n + j -1] = max(i, j);
                     break;
 
                 case 3:
-                    A(i, j) = abs(i - j);
+                    A[(i - 1) * n + j -1] = abs(i - j);
                     break;
 
                 case 4:
-                    A(i, j) = 1 / (i + j - 1);
+                    A[(i - 1) * n + j -1] = 1 / (i + j - 1);
                     break;
             }
         }
@@ -124,9 +121,11 @@ int max(int i, int j)
 
 void init_B(double *B, double *A, int n)
 {
-    for(int i = 1; i <= n; i++)
+    for(int i = 0; i < n; i++)
     {
-        for(int k = 0; k <= (n + 1) / 2; k++)
-            B(i) += A(i, 2*k + 1);
+        double s = 0;
+        for(int k = 0; k < (n + 1) / 2; k++)
+            s += A[i * n + 2 * k];
+        B[i] = s;
     }
 }

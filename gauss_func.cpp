@@ -1,8 +1,6 @@
 //
 // Created by varsem on 24.09.23.
 //
-#define x(i) x[i - 1]
-
 #include <iostream>
 
 #include "functions.h"
@@ -16,8 +14,10 @@ int gauss_func(int n,
                double *x,
                [[maybe_unused]]double *helper)
 {
-    for(int i = 1; i <= n; i++)
-        x(i) = i % 2;
+    for(int i = 0; i < n; i++)
+        x[i] = (i + 1) % 2;
+
+    if(helper) delete[] helper;
 
     return 0;
 }
@@ -65,10 +65,10 @@ int matrixSubtraction(double* A1,
         return -1;
     }
 
-    for(int i = 1; i <= n; i++)
+    for(int i = 0; i < n; i++)
     {
-        for(int j = 1; j <= m; j++)
-            C[m * (i - 1) + j - 1] = A1[m * (i - 1) + j - 1] - A2[m * (i - 1) + j - 1];
+        for(int j = 0; j < m; j++)
+            C[m * i + j] = A1[m * i + j] - A2[m * i + j];
     }
 
     return 0;
