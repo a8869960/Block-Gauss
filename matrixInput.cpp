@@ -2,14 +2,11 @@
 // Created by varsem on 27.09.23.
 //
 #include <cstdio>
-#include <iostream>
 #include <stdlib.h>
 
 #include <fstream>
 
 #include "functions.h"
-
-using namespace std;
 
 int fileMatrixInput(double* A, char* filename, int n)
 {

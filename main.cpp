@@ -1,12 +1,6 @@
-#define A(i, j) A[(i - 1) * n + j - 1]
-#define B(i) B[i - 1]
-
-#include <iostream>
 #include <ctime>
 
 #include "functions.h"
-
-using namespace std;
 
 int main(int ac, char* av[])
 {

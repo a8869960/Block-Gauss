@@ -1,3 +1,7 @@
+#include <iostream>
+
+using namespace std;
+
 int toInt(const char* str, int* ptr);
 
 int fileMatrixInput(double* A, char* filename, int n);

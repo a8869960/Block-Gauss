@@ -1,11 +1,7 @@
 //
 // Created by varsem on 24.09.23.
 //
-#include <iostream>
-
 #include "functions.h"
-
-using namespace std;
 
 int gauss_func(int n,
                [[maybe_unused]]int m,
