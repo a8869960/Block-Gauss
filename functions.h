@@ -29,3 +29,6 @@ int matrixSubtraction(double* A1,
                       int r,
                       int s,
                       double *C);
+void unit(double *a, double *b, double *c, int n, int m);
+
+int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj);

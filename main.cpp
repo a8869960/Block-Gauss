@@ -91,7 +91,7 @@ int main(int ac, char* av[])
             cout << "Solution:" << endl;
             matrixOutput(x, 1, n, r);
         }
-        double t1 = (start_time - clock()) / CLOCKS_PER_SEC;
+        double t1 = (clock() - start_time) / CLOCKS_PER_SEC;
 
         //Запись результата
         start_time = clock();
