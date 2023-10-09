@@ -8,7 +8,18 @@ int fileMatrixInput(double* A, char* filename, int n);
 void f(double *A, int s, int n);
 void init_B(double *B, double *A, int n);
 
-int gauss_func(int n, int m, double *A, double *B, double *x, double *helper);
+int gauss_func(int n,
+               int m,
+               double *A,
+               double *B,
+               double *x,
+               double *Ahelp,
+               double *inverseA,
+               int *indi_m,
+               int *indj_m,
+               int *indi,
+               int *indj,
+               double *a);
 
 void matrixOutput(double *matrix, int l, int n, int r);
 
@@ -30,5 +41,3 @@ int matrixSubtraction(double* A1,
                       int s,
                       double *C);
 void unit(double *a, double *b, double *c, int n, int m);
-
-int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj);

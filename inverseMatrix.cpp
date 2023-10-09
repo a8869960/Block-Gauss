@@ -109,13 +109,16 @@ int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj)
 //    cout << "Ob hod B" << endl;
 //    matrixOutput(B, n, n, n);
 //
-    cout << "Ob hod A" << endl;
-    matrixOutput(A, n, n, n);
+//    cout << "Ob hod A" << endl;
+//    matrixOutput(A, n, n, n);
 
 //    cout << "Matrix product" << endl;
-//    unit(B, a, A, n, n);
+//    unit(a, A, B, n, 3);
 //    matrixProduct(A, n, n, a, n, n, B);
-//    matrixOutput(B, n, n, n);
+//    unit(a, a, B, n, n);
+//    matrixProduct(a, n, n, a, n, n, B);
+//    matrixOutput(B, n, n, 5);
+
 
     return 0;
 }

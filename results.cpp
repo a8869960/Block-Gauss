@@ -17,8 +17,8 @@ double norm1(double *x, int n)
 
 int calc_r1(double* A, double* x, double* B, int n, double* helper, double *r1)
 {
-    if(n > 11000)
-        return 0;
+//    if(n > 11000)
+//        return 0;
 
     memset(helper, 0, n);
 

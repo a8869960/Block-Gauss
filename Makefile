@@ -1,29 +1,34 @@
-all: main.o matrixInput.o gauss_func.o matrixOperations.o matrixOutput.o results.o otherFunctions.o inverseMatrix.o
-	g++ main.o matrixInput.o gauss_func.o matrixOperations.o matrixOutput.o results.o otherFunctions.o inverseMatrix.o
+FLAGS=-O3 -mfpmath=sse -fstack-protector-all -g -W -Wall -Wextra -Wunused -Wcast-align -Werror -pedantic -pedantic-errors -Wfloat-equal -Wpointer-arith -Wformat-security -Wmissing-format-attribute -Wformat=1 -Wwrite-strings -Wcast-align -Wno-long-long -Woverloaded-virtual -Wnon-virtual-dtor -Wcast-qual -Wno-suggest-attribute=format -c
+
+all: main.o matrixInput.o gauss_func.o matrixOperations.o matrixOutput.o results.o otherFunctions.o inverseMatrix.o forGauss.o
+	g++ main.o matrixInput.o gauss_func.o matrixOperations.o matrixOutput.o results.o otherFunctions.o inverseMatrix.o forGauss.o
 
 main.o: main.cpp
-	g++ -O3 -mfpmath=sse -fstack-protector-all -g -W -Wall -Wextra -Wunused -Wcast-align -Werror -pedantic -pedantic-errors -Wfloat-equal -Wpointer-arith -Wformat-security -Wmissing-format-attribute -Wformat=1 -Wwrite-strings -Wcast-align -Wno-long-long -Woverloaded-virtual -Wnon-virtual-dtor -Wcast-qual -Wno-suggest-attribute=format main.cpp -c
+	g++ $(FLAGS) main.cpp
 
 matrixInput.o: matrixInput.cpp
-	g++ -O3 -mfpmath=sse -fstack-protector-all -g -W -Wall -Wextra -Wunused -Wcast-align -Werror -pedantic -pedantic-errors -Wfloat-equal -Wpointer-arith -Wformat-security -Wmissing-format-attribute -Wformat=1 -Wwrite-strings -Wcast-align -Wno-long-long -Woverloaded-virtual -Wnon-virtual-dtor -Wcast-qual -Wno-suggest-attribute=format matrixInput.cpp -c
+	g++ $(FLAGS) matrixInput.cpp
 
 gauss_func.o: gauss_func.cpp
-	g++ -O3 -mfpmath=sse -fstack-protector-all -g -W -Wall -Wextra -Wunused -Wcast-align -Werror -pedantic -pedantic-errors -Wfloat-equal -Wpointer-arith -Wformat-security -Wmissing-format-attribute -Wformat=1 -Wwrite-strings -Wcast-align -Wno-long-long -Woverloaded-virtual -Wnon-virtual-dtor -Wcast-qual -Wno-suggest-attribute=format gauss_func.cpp -c
+	g++ $(FLAGS) gauss_func.cpp
 
 matrixOperations.o: matrixOperations.cpp
-	g++ -O3 -mfpmath=sse -fstack-protector-all -g -W -Wall -Wextra -Wunused -Wcast-align -Werror -pedantic -pedantic-errors -Wfloat-equal -Wpointer-arith -Wformat-security -Wmissing-format-attribute -Wformat=1 -Wwrite-strings -Wcast-align -Wno-long-long -Woverloaded-virtual -Wnon-virtual-dtor -Wcast-qual -Wno-suggest-attribute=format matrixOperations.cpp -c
+	g++ $(FLAGS) matrixOperations.cpp
 
 matrixOutput.o: matrixOutput.cpp
-	g++ -O3 -mfpmath=sse -fstack-protector-all -g -W -Wall -Wextra -Wunused -Wcast-align -Werror -pedantic -pedantic-errors -Wfloat-equal -Wpointer-arith -Wformat-security -Wmissing-format-attribute -Wformat=1 -Wwrite-strings -Wcast-align -Wno-long-long -Woverloaded-virtual -Wnon-virtual-dtor -Wcast-qual -Wno-suggest-attribute=format matrixOutput.cpp -c
+	g++ $(FLAGS) matrixOutput.cpp
 
 results.o: results.cpp
-	g++ -O3 -mfpmath=sse -fstack-protector-all -g -W -Wall -Wextra -Wunused -Wcast-align -Werror -pedantic -pedantic-errors -Wfloat-equal -Wpointer-arith -Wformat-security -Wmissing-format-attribute -Wformat=1 -Wwrite-strings -Wcast-align -Wno-long-long -Woverloaded-virtual -Wnon-virtual-dtor -Wcast-qual -Wno-suggest-attribute=format results.cpp -c
+	g++ $(FLAGS) results.cpp
 
 otherFunctions.o: otherFunctions.cpp
-	g++ -O3 -mfpmath=sse -fstack-protector-all -g -W -Wall -Wextra -Wunused -Wcast-align -Werror -pedantic -pedantic-errors -Wfloat-equal -Wpointer-arith -Wformat-security -Wmissing-format-attribute -Wformat=1 -Wwrite-strings -Wcast-align -Wno-long-long -Woverloaded-virtual -Wnon-virtual-dtor -Wcast-qual -Wno-suggest-attribute=format otherFunctions.cpp -c
+	g++ $(FLAGS) otherFunctions.cpp
 
 inverseMatrix.o: inverseMatrix.cpp
-	g++ -O3 -mfpmath=sse -fstack-protector-all -g -W -Wall -Wextra -Wunused -Wcast-align -Werror -pedantic -pedantic-errors -Wfloat-equal -Wpointer-arith -Wformat-security -Wmissing-format-attribute -Wformat=1 -Wwrite-strings -Wcast-align -Wno-long-long -Woverloaded-virtual -Wnon-virtual-dtor -Wcast-qual -Wno-suggest-attribute=format inverseMatrix.cpp -c
+	g++ $(FLAGS) inverseMatrix.cpp
+
+forGauss.o: forGauss.cpp
+	g++ $(FLAGS) forGauss.cpp
 
 clean:
 	rm -f *.out *.o *.gch
