@@ -3,6 +3,8 @@
 //
 #include "gauss.h"
 
+#include <cstring>
+
 int matrixMax(double *A,
               int step,
               int n,
@@ -14,8 +16,8 @@ int matrixMax(double *A,
               int *indi_m,
               int *indj_m,
               double* block,
-              double *inverse,
-              double *help)
+              double *block_inv,
+              double *block_h)
 {
     double min = 1.7976931348623158e+308, norm;
     int imax = step, jmax = step, count = 0;
@@ -24,9 +26,10 @@ int matrixMax(double *A,
         for(int j = step; j < n; j++) {
             get_block(A, block, indi[i], indj[j], n, m, k, l);
 
-            if (inverseMatrix(block, inverse, help, m, indi_m, indj_m) == 0)
+            if (inverseMatrix(block, block_inv, block_h, m, indi_m, indj_m) == 0)
             {
-                norm = matrixNorm(inverse, m);
+                norm = matrixNorm(block_inv, m);
+//                cout << "NORM " << norm << endl;
 
                 if (norm < min)
                 {
@@ -34,12 +37,13 @@ int matrixMax(double *A,
 
                     imax = i;
                     jmax = j;
+                    cout << "MAX " << imax << jmax << endl;
                 }
             } else
                 count++;
         }
 
-    if(count == step * step)
+    if(count == (n - step) * (n - step))
         return -1;
 
     int helper;
@@ -51,6 +55,8 @@ int matrixMax(double *A,
     helper = indj[jmax];
     indj[jmax] = indj[step];
     indj[step] = helper;
+    
+//    cout << "MAX " << imax << jmax << endl;
 
     return 0;
 }
@@ -76,12 +82,12 @@ double matrixNorm(double *A, int n)
 void get_block(
         double* A,
         double* block,
-        size_t i,
-        size_t j,
-        size_t n,
-        size_t m,
-        size_t k,
-        size_t l)
+        int i,
+        int j,
+        int n,
+        int m,
+        int k,
+        int l)
 {
     int block_m = (i > k ? l : m), block_l = (j > k ? l : m);
 
@@ -89,23 +95,23 @@ void get_block(
     int a = i * n * m + j * m; //number of first element of the block
 
     for(r = 0; r < block_m; r++)
-    {
         for(s = 0; s < block_l; s++)
-        {
             block[r * block_m + s] = A[a + r * n + s];
-        }
-    }
+
+    for(r = block_m; r < m; r++)
+        for(s = block_l; s < m; s++)
+            block[r * block_m + s] = 0;
 }
 
 void put_block(
         double* A,
         double* block,
-        size_t i,
-        size_t j,
-        size_t n,
-        size_t m,
-        size_t k,
-        size_t l)
+        int i,
+        int j,
+        int n,
+        int m,
+        int k,
+        int l)
 {
     int block_m = (i > k ? l : m), block_l = (j > k ? l : m);
 
@@ -118,5 +124,42 @@ void put_block(
         {
             A[a + r * n + s] = block[r * block_m + s];
         }
+    }
+}
+
+void E(double* block, int m)
+{
+    memset(block, 0, sizeof(double) * m * m);
+
+    for(int i = 0; i < m; i++)
+        block[i * m + i] = 1;
+}
+
+void get_block_b( double *B, double *block, int i, int m, int k, int l)
+{
+    int block_m = (i > k ? l : m);
+
+    int r;
+    int b = i * m; //number of first element of the block
+
+    for(r = 0; r < block_m; r++)
+    {
+        block[r] = B[b + r];
+    }
+
+    for(r = block_m; r < m; r++)
+        block[r] = 0;
+}
+
+void put_block_b( double *B, double *block, int i, int m, int k, int l)
+{
+    int block_m = (i > k ? l : m);
+
+    int r;
+    int b = i * m; //number of first element of the block
+
+    for(r = 0; r < block_m; r++)
+    {
+         B[b + r] = block[r];
     }
 }

@@ -84,15 +84,22 @@ int main(int ac, char* av[])
         double *helper = nullptr;
 
         //Метод Гаусса
-        double *Ahelp = new double[n * n], *inverseA = new double[n * n], *a = new double[n * n];
-        int *indi_m = new int[m], *indj_m = new int[m];
+        double *Ahelp = new double[n * n], *inverseA = new double[n * n];
+
         int k = n / m; //how many blocks m*m
         int l = n - k * m; //how long last block
         int bl = (l != 0) ? k + 1 : k; //number of all blocks
+
+        //for block
+        double* block = new double[m * m], *block_inv = new double[m * m], *block_h = new double[m * m], *block_ii = new double[m * m];
+        int *indi_m = new int[m], *indj_m = new int[m];
+
+        //for A
+        double *a = new double[n * n], *b = new double[n];
         int *indi = new int[bl], *indj = new int[bl];
 
         clock_t start_time =  clock();
-        if(gauss_func(n, m, A, B, x, Ahelp, inverseA, indi_m, indj_m, indi, indj, a) == -1)
+        if(gauss_func(n, m, A, B, x, Ahelp, inverseA, indi_m, indj_m, indi, indj, a, b, block, block_inv, block_h, block_ii) == -1)
         {
             cout << "Can't be used this method." << endl;
         } else

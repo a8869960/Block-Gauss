@@ -9,17 +9,22 @@ void f(double *A, int s, int n);
 void init_B(double *B, double *A, int n);
 
 int gauss_func(int n,
-               int m,
+               [[maybe_unused]]int m,
                double *A,
-               double *B,
+               [[maybe_unused]]double *B,
                double *x,
                double *Ahelp,
                double *inverseA,
                int *indi_m,
                int *indj_m,
-               int *indi,
-               int *indj,
-               double *a);
+               [[maybe_unused]]int *indi,
+               [[maybe_unused]]int *indj,
+               double* a,
+               double *b,
+               double *block,
+               double *block_inv,
+               double *block_h,
+               [[maybe_unused]]double *block_ii);
 
 void matrixOutput(double *matrix, int l, int n, int r);
 
