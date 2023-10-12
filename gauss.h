@@ -45,3 +45,5 @@ void E(double* block, int m);
 
 void get_block_b( double *B, double *block, int i, int m, int k, int l);
 void put_block_b( double *B, double *block, int i, int m, int k, int l);
+
+void matrix_product(double *A, double* B, double* C, int n, int s, int m);

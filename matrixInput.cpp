@@ -90,21 +90,21 @@ void f(double *A, int s, int n)
     {
         for(int j = 1; j <= n; j++)
         {
-            switch (s) {
+            switch(s) {
                 case 1:
-                    A[(i - 1) * n + j -1] = n - max(i, j) + 1;
+                    A[(i - 1) * n + j - 1] = n - max(i, j) + 1;
                     break;
 
                 case 2:
-                    A[(i - 1) * n + j -1] = max(i, j);
+                    A[(i - 1) * n + j - 1] = max(i, j);
                     break;
 
                 case 3:
-                    A[(i - 1) * n + j -1] = abs(i - j);
+                    A[(i - 1) * n + j - 1] = abs(i - j);
                     break;
 
                 case 4:
-                    A[(i - 1) * n + j -1] = 1 / (i + j - 1);
+                    A[(i - 1) * n + j - 1] = 1. / (i + j - 1);
                     break;
             }
         }
