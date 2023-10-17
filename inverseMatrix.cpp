@@ -1,20 +1,22 @@
 //
 // Created by varsem on 04.10.23.
 //
-#define eps 1e-20
+#define eps 1e-15
 #include <iostream>
 #include <cstring>
 
 #include "functions.h"
+#include "gauss.h"
 
 using namespace std;
 
 //int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj);
-int matrixMax(double *A, int k, int n, int *indi, int *indj);
+int matrixMax(double *A, int k, int n, int *indi, int *indj, double norm);
 
 int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj)
 {
     int i, j, ii;
+    double norm = matrixNorm(a, n);
 
     for(i = 0; i < n; i++)
     {
@@ -39,7 +41,7 @@ int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj)
     //Прямой ход
     for(i = 0; i < n; i++)
     {
-        if(matrixMax(A, i, n, indi, indj) == -1)
+        if(matrixMax(A, i, n, indi, indj, norm) == -1)
             return -1;
 
         double Aii = A[indi[i] * n + indj[i]];
@@ -56,6 +58,8 @@ int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj)
 
 //        cout << "--------A/---" << endl;
 //        matrixOutput(A, n, n, n);
+//        cout << "--------B/---" << endl;
+//        matrixOutput(B, n, n, n);
 
         for(ii = i + 1; ii < n; ii++)
         {
@@ -71,6 +75,8 @@ int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj)
         }
 //        cout << "--------A0---" << endl;
 //        matrixOutput(A, n, n, n);
+//        cout << "--------B0---" << endl;
+//        matrixOutput(B, n, n, n);
     }
 //    cout << "Pr hod A" << endl;
 //    matrixOutput(A, n, n, n);
@@ -106,6 +112,10 @@ int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj)
         for(j = 0; j < n; j++)
             A[indi[i] * n + j] = B[indj[i] * n + j];
 
+//    cout << "InvM" << endl;
+//    matrixOutput(A, n, n, n);
+//    cout << endl;
+
 //    cout << "Ob hod B" << endl;
 //    matrixOutput(B, n, n, n);
 //
@@ -123,7 +133,7 @@ int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj)
     return 0;
 }
 
-int matrixMax(double *A, int k, int n, int *indi, int *indj)
+int matrixMax(double *A, int k, int n, int *indi, int *indj, double norm)
 {
     double max = 0;
     int imax = k, jmax = k;
@@ -141,7 +151,7 @@ int matrixMax(double *A, int k, int n, int *indi, int *indj)
 
 //    cout << "MAX = " << imax << jmax << " " << A[indi[imax] * n + indj[jmax]] << endl;
 
-    if(abs(max) < eps)
+    if(abs(max) < eps * norm)
         return -1;
 
     int helper;

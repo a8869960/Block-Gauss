@@ -18,14 +18,11 @@ double norm1(double *x, int n)
 
 int calc_r1(double* A, double* x, double* B, int n, double* helper, double *r1)
 {
-//    if(n > 11000)
-//        return 0;
-
     memset(helper, 0, n);
 
     matrix_product(A, x, helper, n, n, 1);
 
-    if(matrixSubtraction(helper, n, 1, B, n, 1, helper) == -1)
+    if(matrixSubtraction(helper,B, helper, n, 1) == -1)
         return -1;
 
     double help = norm1(B, n);

@@ -99,7 +99,7 @@ int main(int ac, char* av[])
         int *indi = new int[bl], *indj = new int[bl];
 
         clock_t start_time =  clock();
-        if(gauss_func(n, m, A, B, x, Ahelp, inverseA, indi_m, indj_m, indi, indj, a, b, block, block_inv, block_h, block_ii) == -1)
+        if(gauss_func(n, m, A, B, x, indi_m, indj_m, indi, indj, a, b, block, block_inv, block_h) == -1)
         {
             cout << "Can't be used this method." << endl;
         } else
@@ -132,6 +132,14 @@ int main(int ac, char* av[])
         delete[] Ahelp;
         delete[] indi_m;
         delete[] indj_m;
+        delete[] indi;
+        delete[] indj;
+        delete[] block;
+        delete[] block_inv;
+        delete[] block_h;
+        delete[] block_ii;
+        delete[] a;
+        delete[] b;
 
         return 0;
     } catch (const bad_alloc& e)

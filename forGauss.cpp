@@ -96,16 +96,12 @@ void get_block(
     int a = i * n * m + j * m; //number of first element of the block
 
     for(r = 0; r < block_m; r++)
-    {
         for(s = 0; s < block_l; s++)
-            block[r * m + s] = A[a + r * n + s];
-        for(s = block_l; s < m; s++)
-            block[r * m + s] = 0;
-    }
+            block[r * block_l + s] = A[a + r * n + s];
 
 
     for(r = block_m; r < m; r++)
-        for(s = 0; s < m; s++)
+        for(s = 0; s < block_l; s++)
             block[r * m + s] = 0;
 }
 
