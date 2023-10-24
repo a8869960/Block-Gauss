@@ -94,15 +94,16 @@ void get_block(
 //    cout << " i " << i << " " << "j " << j << " " << " block_ m = " << block_m << " " << "block_l = " << block_l << endl;
     int r, s;
     int a = i * n * m + j * m; //number of first element of the block
+    memset(block, 0, sizeof(double) * m * m);
 
     for(r = 0; r < block_m; r++)
         for(s = 0; s < block_l; s++)
             block[r * block_l + s] = A[a + r * n + s];
 
 
-    for(r = block_m; r < m; r++)
-        for(s = 0; s < block_l; s++)
-            block[r * m + s] = 0;
+//     for(r = block_m; r < m; r++)
+//         for(s = 0; s < block_l; s++)
+//             block[r * m + s] = 0;
 }
 
 void put_block(
@@ -140,6 +141,8 @@ void E(double* block, int m)
 void get_block_b( double *B, double *block, int i, int m, int k, int l)
 {
     int block_m = (i == k ? l : m);
+    
+    memset(block, 0, sizeof(double) * m * m);
 
     int r;
     int b = i * m; //number of first element of the block
@@ -149,8 +152,8 @@ void get_block_b( double *B, double *block, int i, int m, int k, int l)
         block[r] = B[b + r];
     }
 
-    for(r = block_m; r < m; r++)
-        block[r] = 0;
+//     for(r = block_m; r < m; r++)
+//         block[r] = 0;
 }
 
 void put_block_b( double *B, double *block, int i, int m, int k, int l)

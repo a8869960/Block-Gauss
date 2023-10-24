@@ -1,7 +1,7 @@
 //
 // Created by varsem on 04.10.23.
 //
-#define eps 1e-15
+#define eps 1e-16
 #include <iostream>
 #include <cstring>
 
@@ -15,6 +15,17 @@ int matrixMax(double *A, int k, int n, int *indi, int *indj, double norm);
 
 int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj)
 {
+    if(n == 1)
+    {
+        if(abs(a[0]) < eps )
+        {
+//            cout << "Матрица вырождена." << endl;
+            return -1;
+        }
+        A[0] = 1. / a[0];
+        return 0;
+    }
+
     int i, j, ii;
     double norm = matrixNorm(a, n);
 
@@ -123,12 +134,15 @@ int inverseMatrix(double *a, double *A, double *B, int n, int *indi, int *indj)
 //    matrixOutput(A, n, n, n);
 
 //    cout << "Matrix product" << endl;
-//    unit(a, A, B, n, 3);
+//    matrix_product(a, A, B, n, n, n);
+//    E(A, n);
+//    matrixSubtraction(B, A, B, n , n);
+//    norm = matrixNorm(B, n);
+//    cout << norm << " norm" << endl;
 //    matrixProduct(A, n, n, a, n, n, B);
 //    unit(a, a, B, n, n);
 //    matrixProduct(a, n, n, a, n, n, B);
 //    matrixOutput(B, n, n, 5);
-
 
     return 0;
 }
@@ -149,9 +163,12 @@ int matrixMax(double *A, int k, int n, int *indi, int *indj, double norm)
             }
         }
 
-//    cout << "MAX = " << imax << jmax << " " << A[indi[imax] * n + indj[jmax]] << endl;
+//    cout << "A in MAM" << endl;
+//    matrixOutput(A, n, n, 12);
+//
+//    cout << "MAX " << imax << " " << jmax << " : " << A[indi[imax] * n + indj[jmax]] << endl;
 
-    if(abs(max) < eps * norm)
+    if(abs(A[indi[imax] * n + indj[jmax]]) < eps * norm)
         return -1;
 
     int helper;
