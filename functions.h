@@ -9,7 +9,7 @@ void f(double *A, int s, int n);
 void init_B(double *B, double *A, int n);
 
 int gauss_func(int n,
-               [[maybe_unused]]int m,
+               int m,
                double *A,
                [[maybe_unused]]double *B,
                double *x,

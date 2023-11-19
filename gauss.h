@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int inverseMatrix(double *a, double *A, double *B, int n, int *indi_m, int *indj_m); //a^(-1) = A
+int inverseMatrix(double *a, double *A, double *B, int n, int *indi_m, int *indj_m, double norm); //a^(-1) = A
 
 int matrixMax(double *A,
               int step,
@@ -19,7 +19,8 @@ int matrixMax(double *A,
               int *indj_m,
               double* block,
               double *block_inv,
-              double *block_h);
+              double *block_h,
+              double NORM);
 double matrixNorm(double *A, int n);
 
 void get_block(

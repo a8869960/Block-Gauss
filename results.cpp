@@ -33,11 +33,11 @@ int calc_r1(double* A, double* x, double* B, int n, double* helper, double *r1)
 
     double help = norm1(B, n);
 
-    if(abs(help) < 1e-16)
-    {
-        cout << "Division by 0." << endl;
-        return 0;
-    }
+//    if(abs(help) < 1e-16)
+//    {
+//        cout << "Division by 0." << endl;
+//        return 0;
+//    }
 
     *r1 = norm1(helper, n) / help;
 

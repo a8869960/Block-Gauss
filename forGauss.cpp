@@ -2,8 +2,11 @@
 // Created by varsem on 09.10.23.
 //
 #include "gauss.h"
+#include "functions.h"
 
 #include <cstring>
+
+#define eps 1e-15
 
 int matrixMax(double *A,
               int step,
@@ -17,7 +20,8 @@ int matrixMax(double *A,
               int *indj_m,
               double* block,
               double *block_inv,
-              double *block_h)
+              double *block_h,
+              double NORM)
 {
     double min = 1.7976931348623158e+308, norm;
     int imax = step, jmax = step, count = 0;
@@ -26,7 +30,11 @@ int matrixMax(double *A,
         for(int j = step; j < k; j++) {
             get_block(A, block, indi[i], indj[j], n, m, k, l);
 
-            if (inverseMatrix(block, block_inv, block_h, m, indi_m, indj_m) == 0)
+//            cout << "MATRIX MAX BLOCK" << endl;
+//            matrixOutput(block, m, m, m);
+//            cout << endl;
+
+            if (inverseMatrix(block, block_inv, block_h, m, indi_m, indj_m, NORM) == 0)
             {
                 norm = matrixNorm(block_inv, m);
 //                cout << "NORM " << norm << endl;

@@ -98,10 +98,12 @@ int main(int ac, char* av[])
         double *a = new double[n * n], *b = new double[n];
         int *indi = new int[bl], *indj = new int[bl];
 
+        bool flag = true;
         clock_t start_time =  clock();
         if(gauss_func(n, m, A, B, x, indi_m, indj_m, indi, indj, a, b, block, block_inv, block_h) == -1)
         {
             cout << "Can't be used this method." << endl;
+            flag = false;
         } else
         {
             cout << "Solution:" << endl;
@@ -111,13 +113,15 @@ int main(int ac, char* av[])
 
         //Запись результата
         start_time = clock();
-        double r1 = 0;
-        helper = new double[n];
-        if(calc_r1(A, x, B, n, helper, &r1) == -1)
-            return -1;
+        double r1 = 0, r2 = 0;
+        if(flag)
+        {
+            helper = new double[n];
+            if (calc_r1(A, x, B, n, helper, &r1) == -1)
+                return -1;
 
-        double r2;
-        calc_r2(x, n, &r2);
+            calc_r2(x, n, &r2);
+        }
         double t2 = (clock() - start_time) / CLOCKS_PER_SEC;
 
         printf (
